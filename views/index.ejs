@@ -11,14 +11,13 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 
     <script src="/javascripts/app.js"></script>
-    <script src="/javascripts/js.js"></script>
   </head>
+
   <body ng-app="gameMaster" ng-controller="MainCtrl">
       <div class="container">
-          <h1 class="page-header center-text">Kontrollpanel</h1>
           <div class="row">
               <div class="col-md-12">
-                  År overlevd:
+                  <p style="margin-top: 20px" class="subtitle center-text">År overlevd</p>
                   <div class="progress" style="height: 30px">
                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="82" aria-valuemin="13" max="82" min="13" style="width:{{year}}%">{{year}}</div>
                   </div>
@@ -26,43 +25,24 @@
           </div>
           <div class="row">
               <div class="col-md-5">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">Ryggsekk</div>
+                  <div class="panel panel-info">
+                      <div class="panel-heading">Forbruk</div>
                       <div class="panel-body">
                           <div class="center">
                               <table>
                                   <tr>
                                       <td class="table-cell">
                                           <div ng-click="drinkWater()" class="filler-box water"></div>
-                                          <div ng-click="adjustWater('-')" class="plus-btn center-text border-left noselect">-</div>
-                                          <div class="plus-btn center-text">{{numWater}}</div>
-                                          <div ng-click="adjustWater('+')" class="plus-btn center-text border-right noselect">+</div>
                                       </td>
                                       <td class="table-cell">
                                           <div ng-click="eatHealthyFood()" class="filler-box food-healthy"></div>
-                                          <div ng-click="adjustHealthyFood('-')" class="plus-btn center-text border-left noselect">-</div>
-                                          <div class="plus-btn center-text">{{numHealthyFood}}</div>
-                                          <div ng-click="adjustHealthyFood('+')" class="plus-btn center-text border-right noselect">+</div>
                                       </td>
                                       <td class="table-cell">
-                                          <div ng-click="eatJunkFood()" class="filler-box food-junk"></div>
-                                          <div ng-click="adjustJunkFood('-')" class="plus-btn center-text border-left noselect">-</div>
-                                          <div class="plus-btn center-text">{{numJunkFood}}</div>
-                                          <div ng-click="adjustJunkFood('+')" class="plus-btn center-text border-right noselect">+</div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="table-cell">
-                                          <div ng-click="drinkWine()" class="filler-box wine"></div>
-                                          <div ng-click="adjustWine('-')" class="plus-btn center-text border-left noselect">-</div>
-                                          <div class="plus-btn center-text">{{numWine}}</div>
-                                          <div ng-click="adjustWine('+')" class="plus-btn center-text border-right noselect">+</div>
+                                          <div ng-click="party()" class="filler-box wine"></div>
                                       </td>
                                       <td class="table-cell">
-                                          <div class="filler-box condom"></div>
-                                          <div ng-click="adjustCondoms('-')" class="plus-btn center-text border-left noselect">-</div>
-                                          <div class="plus-btn center-text">{{numCondoms}}</div>
-                                          <div ng-click="adjustCondoms('+')" class="plus-btn center-text border-right noselect">+</div>
+                                          <div ng-show="condomSwitch" id="condom-box" ng-click="useCondom()" class="filler-box condom condom-box"></div>
+                                          <div ng-hide="condomSwitch" id="condom-box" ng-click="useCondom()" class="filler-box-clicked"></div>
                                       </td>
 
                                   </tr>
@@ -70,9 +50,34 @@
                           </div>
                       </div>
                   </div>
+
+                  <div style="margin-top: 34px" class="panel panel-info">
+                      <div class="panel-heading">Sykdommer</div>
+                      <div class="panel-body">
+                          <table>
+                              <tr>
+                                  <td class="table-cell">
+                                      <div ng-click="useSmoke()" class="filler-box smoke"></div>
+                                  </td>
+                                  <td class="table-cell">
+                                      <div ng-click="dropContamination()" class="filler-box drops"></div>
+                                  </td>
+                                  <td class="table-cell">
+                                      <div ng-click="getStd()" class="filler-box std"></div>
+                                  </td>
+                                  <td class="table-cell">
+                                      <div ng-click="rollDice()" class="filler-box dice"></div>
+                                  </td>
+
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+
+
               </div>
               <div class="col-md-7">
-                  <div class="panel panel-default">
+                  <div class="panel panel-info">
                       <div class="panel-heading">Målere</div>
                       <div class="panel-body">
                           <p class="subtitle">Helse</p>
@@ -95,6 +100,17 @@
                   </div>
               </div>
           </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="console">
+                      <div style="background-color: white">
+                          <p class="console-header">Console</p>
+                      </div>
+                      <p class="message">{{message}}</p>
+                  </div>
+              </div>
+          </div>
       </div>
+          <script src="/javascripts/js.js"></script>
   </body
 </html>

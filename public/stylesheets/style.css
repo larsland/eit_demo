@@ -4,6 +4,8 @@
 * 3.0 - Useful
 */
 
+
+
 /*----------------Backpack--------------------------*/
 .filler-box {
     width: 100px;
@@ -12,9 +14,17 @@
     border: 1px solid black;
     cursor: pointer;
 }
+.filler-box-clicked {
+    width: 100px;
+    height: 100px;
+    background-color: #4dff4d;
+    border: 1px solid black;
+    cursor: pointer;
+}
 .filler-box:hover {
     opacity: 0.6;
 }
+
 .food-junk {
     background-image: url('../images/food_junk.png');
 }
@@ -39,6 +49,19 @@
 .wine {
     background-image: url('../images/wine.png');
 }
+.smoke {
+    background-image: url('../images/smoke.png');
+}
+.drops {
+    background-image: url('../images/drops.png');
+}
+.std {
+    background-image: url('../images/std.png');
+}
+.dice {
+    background-image: url('../images/dice.png');
+}
+
 
 .item-number {
     font-size: 20px;
@@ -57,8 +80,27 @@
     border-bottom: 1px solid black;
 }
 
+
 .table-cell {
     font-size: 0px;
+}
+
+.dice-number {
+    font-size: 40px;
+}
+
+.console {
+    background-color: #333;
+    height: 120px;
+}
+.message {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+.console-header {
+    font-size: 20px;
+    text-align: center;
 }
 
 /*---------------------Overall--------------------*/
@@ -87,4 +129,8 @@
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;           /* non-prefixed version, currently
                                   not supported by any browser */
+}
+
+.inline {
+    display: inline-block;
 }

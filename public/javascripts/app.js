@@ -12,77 +12,73 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
     $scope.numJunkFood = 0;
     $scope.numCondoms = 1;
     $scope.numWine = 0;
+    $scope.dice = 5;
 
-    //--------------------Functions to adjust items--------------------------
-    $scope.adjustWater = function(char) {
-        if (char === '+') {$scope.numWater++;}
-        else if (char === '-') {$scope.numWater -= 1}
-    }
-    $scope.adjustHealthyFood = function(char) {
-        if (char === '+') {$scope.numHealthyFood++;}
-        else if (char === '-') {$scope.numHealthyFood -= 1}
-    }
-    $scope.adjustJunkFood = function(char) {
-        if (char === '+') {$scope.numJunkFood++;}
-        else if (char === '-') {$scope.numJunkFood -= 1}
-    }
-    $scope.adjustCondoms = function(char) {
-        if (char === '+') {$scope.numCondoms++;}
-        else if (char === '-') {$scope.numCondoms -= 1}
-    }
-    $scope.adjustWine = function(char) {
-        if (char === '+') {$scope.numWine++;}
-        else if (char === '-') {$scope.wine -= 1}
-    }
+    $scope.condomSwitch = true;
+
 
     //--------------------Functions to perform actions--------------------------
     $scope.drinkWater = function() {
-        if ($scope.numWater <= 0) {
-            console.log("No more water!")
-        }
-        else {
-            $scope.thirst = 0;
-            $scope.numWater -= 1;
-        }
+        $scope.thirst = 0;
     }
     $scope.eatHealthyFood = function() {
-        if ($scope.numHealthyFood <= 0) {
-            console.log("No more water!")
+        $scope.hunger = 0;
+        checkHealth(10, '+');
+    }
+
+    $scope.party = function() {
+        checkStress(50)
+        checkHealth(20, '-')
+    }
+    $scope.rollDice = function() {
+        $scope.message = Math.floor((Math.random() * 6) + 1);
+    }
+    $scope.useCondom = function() {
+        $scope.message = "Du tok på deg kondom"
+        if ($scope.condomSwitch == true) {
+            $scope.condomSwitch = false;
         }
-        else {
-            $scope.hunger = 0;
-            $scope.numHealthyFood -= 1;
+        else if ($scope.condomSwitch == false) {
+            $scope.condomSwitch = true;
         }
     }
-    $scope.eatJunkFood = function() {
-        if ($scope.numJunkFood <= 0) {
-            console.log("No more water!")
-        }
-        else {
-            $scope.hunger = 0;
-            $scope.numJunkFood -= 1;
-            checkStress(10);
-            $scope.health -= 10;
-        }
+    $scope.useSmoke = function() {
+        checkHealth(10, '-');
+        checkStress(5)
     }
-    $scope.drinkWine = function() {
-        if ($scope.numWine <= 0) {
-            console.log("No more wine!")
-        }
-        else {
-            $scope.stress = 100;
-            $scope.numWine -= 1;
-            $scope.health -= 20;
-        }
+    $scope.dropContamination = function() {
+        checkHealth(30, '-');
+    }
+    $scope.getStd= function() {
+        checkHealth(40, '-');
     }
 
     checkStress = function(n) {
-        if (($scope.stress - n) <= 0) {
-            $scope.stress = 0;
+        if (($scope.stress + n) >= 100) {
+            $scope.stress = 100;
         }
         else {
-            $scope.stress -= n;
+            $scope.stress += n;
         }
+    }
+    checkHealth = function(n, v) {
+        if (v === '+') {
+            if (($scope.health + n) >= 100) {
+                $scope.health = 100;
+            }
+            else {
+                $scope.health += n;
+            }
+        }
+        else if (v === '-') {
+            if (($scope.health - n) <= 0) {
+                $scope.health = 0;
+            }
+            else {
+                $scope.health -= n;
+            }
+        }
+
     }
 
 //--------------------Starting all timers--------------------------
@@ -105,14 +101,14 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
         if ($scope.hunger >= 100) {
             $scope.hunger = 100;
         }
-    }, 500)
+    }, 900)
 
     $interval(function() {
         $scope.thirst++;
         if ($scope.thirst >= 100) {
             $scope.thirst = 100;
         }
-    }, 300)
+    }, 500)
 
     $interval(function() {
         if (($scope.hunger >= 90) || ($scope.thirst >= 90) || ($scope.stress <= 20)) {
