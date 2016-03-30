@@ -18,13 +18,14 @@
           <h1 class="page-header center-text">Kontrollpanel</h1>
           <div class="row">
               <div class="col-md-12">
+                  År overlevd:
                   <div class="progress" style="height: 30px">
-                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="82" aria-valuemin="13" max="82" min="13" style="width:{{year}}%">Year {{year}}</div>
+                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="82" aria-valuemin="13" max="82" min="13" style="width:{{year}}%">{{year}}</div>
                   </div>
               </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-5">
                   <div class="panel panel-default">
                       <div class="panel-heading">Ryggsekk</div>
                       <div class="panel-body">
@@ -49,31 +50,28 @@
                                           <div class="plus-btn center-text">{{numJunkFood}}</div>
                                           <div ng-click="adjustJunkFood('+')" class="plus-btn center-text border-right noselect">+</div>
                                       </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="table-cell">
+                                          <div ng-click="drinkWine()" class="filler-box wine"></div>
+                                          <div ng-click="adjustWine('-')" class="plus-btn center-text border-left noselect">-</div>
+                                          <div class="plus-btn center-text">{{numWine}}</div>
+                                          <div ng-click="adjustWine('+')" class="plus-btn center-text border-right noselect">+</div>
+                                      </td>
                                       <td class="table-cell">
                                           <div class="filler-box condom"></div>
                                           <div ng-click="adjustCondoms('-')" class="plus-btn center-text border-left noselect">-</div>
                                           <div class="plus-btn center-text">{{numCondoms}}</div>
                                           <div ng-click="adjustCondoms('+')" class="plus-btn center-text border-right noselect">+</div>
                                       </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="table-cell">
-                                          <div class="filler-box spray"></div>
-                                      </td>
-                                      <td class="table-cell">
-                                          <div ng-click="run()" class="filler-box run"></div>
-                                      </td>
-                                      <td class="table-cell">
-                                          <div ng-click="washing = 0" class="filler-box wash"></div>
-                                      </td>
-                                      <td class="table-cell"><div class="filler-box"></div></td>
+
                                   </tr>
                               </table>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-7">
                   <div class="panel panel-default">
                       <div class="panel-heading">Målere</div>
                       <div class="panel-body">
@@ -81,7 +79,7 @@
                           <div class="progress" style="height: 50px">
                               <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="82" aria-valuemin="0" style="width:{{health}}%">{{health}}%</div>
                           </div>
-                          <p class="subtitle">Stress</p>
+                          <p class="subtitle">Lykke</p>
                           <div class="progress" style="height: 50px">
                               <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="82" aria-valuemin="0" style="width:{{stress}}%">{{stress}}%</div>
                           </div>
@@ -89,12 +87,10 @@
                           <div class="progress">
                               <div class="progress-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" style="width:{{hunger}}%">{{year}}%</div>
                           </div>
-                          Tørst
+                          Tørste
                           <div class="progress">
                               <div class="progress-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" style="width:{{thirst}}%">{{year}}%</div>
                           </div>
-                          Tid siden fysisk aktivitet: {{training}} sek<br>
-                          Tid siden håndvask: {{washing}} sek
                       </div>
                   </div>
               </div>

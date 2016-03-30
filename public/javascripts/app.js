@@ -1,18 +1,17 @@
 var app = angular.module('gameMaster', []);
 
 app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
-    $scope.year = 13;
+    $scope.year = 0;
     $scope.health = 100;
     $scope.hunger = 0;
-    $scope.stress = 0;
+    $scope.stress = 100;
     $scope.thirst = 0;
-    $scope.training = 0;
-    $scope.washing = 0;
 
     $scope.numWater = 3;
-    $scope.numHealthyFood = 1;
-    $scope.numJunkFood = 1;
+    $scope.numHealthyFood = 2;
+    $scope.numJunkFood = 0;
     $scope.numCondoms = 1;
+    $scope.numWine = 0;
 
     //--------------------Functions to adjust items--------------------------
     $scope.adjustWater = function(char) {
@@ -30,6 +29,10 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
     $scope.adjustCondoms = function(char) {
         if (char === '+') {$scope.numCondoms++;}
         else if (char === '-') {$scope.numCondoms -= 1}
+    }
+    $scope.adjustWine = function(char) {
+        if (char === '+') {$scope.numWine++;}
+        else if (char === '-') {$scope.wine -= 1}
     }
 
     //--------------------Functions to perform actions--------------------------
@@ -62,9 +65,15 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
             $scope.health -= 10;
         }
     }
-    $scope.run = function() {
-        $scope.training = 0;
-        checkStress(20);
+    $scope.drinkWine = function() {
+        if ($scope.numWine <= 0) {
+            console.log("No more wine!")
+        }
+        else {
+            $scope.stress = 100;
+            $scope.numWine -= 1;
+            $scope.health -= 20;
+        }
     }
 
     checkStress = function(n) {
@@ -79,15 +88,15 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
 //--------------------Starting all timers--------------------------
     $interval(function(){
         $scope.year++;
-        if ($scope.year >= 82) {
-            $scope.year = 82;
+        if ($scope.year >= 100) {
+            $scope.year = 100;
         }
     }, 3000)
 
     $interval(function() {
-        $scope.stress++;
-        if ($scope.stress >= 100) {
-            $scope.stress = 100;
+        $scope.stress -= 1;
+        if ($scope.stress <= 0) {
+            $scope.stress = 0;
         }
     }, 1000)
 
@@ -103,18 +112,10 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
         if ($scope.thirst >= 100) {
             $scope.thirst = 100;
         }
-    }, 200)
+    }, 300)
 
     $interval(function() {
-        $scope.training++;
-    }, 1000);
-
-    $interval(function() {
-        $scope.washing++;
-    }, 1000);
-
-    $interval(function() {
-        if (($scope.hunger >= 90) || ($scope.thirst >= 90) || ($scope.stress >= 90)) {
+        if (($scope.hunger >= 90) || ($scope.thirst >= 90) || ($scope.stress <= 20)) {
             $scope.health -= 1;
         }
         if ($scope.health <= 0) {
