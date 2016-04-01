@@ -6,17 +6,9 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
     $scope.hunger = 0;
     $scope.stress = 100;
     $scope.thirst = 0;
-
-    $scope.numWater = 3;
-    $scope.numHealthyFood = 2;
-    $scope.numJunkFood = 0;
-    $scope.numCondoms = 1;
-    $scope.numWine = 0;
     $scope.dice = 5;
-
     $scope.condomSwitch = true;
-    $scope.healthArray = [];
-
+    $scope.message = "Spillet starter, lykke til!";
 
     //--------------------Functions to perform actions--------------------------
     $scope.drinkWater = function() {
@@ -35,7 +27,7 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
         $scope.message = "Du hadde en fest. Du ble gladere, men mistet helse."
     }
     $scope.rollDice = function() {
-        $scope.message = Math.floor((Math.random() * 6) + 1);
+        return(Math.floor((Math.random() * 6) + 1));
     }
     $scope.useCondom = function() {
         if ($scope.condomSwitch == true) {
@@ -56,10 +48,28 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
         checkHealth(30, '-');
         $scope.message = "Du har blitt smittet av tuberkolose!"
     }
+    $scope.haveSex = function() {
+        if (!$scope.condomSwitch) {
+            $scope.message = "Du hadde trygg sex med kondom, bra!"
+            $scope.condomSwitch = true;
+        }
+        else if ($scope.condomSwitch) {
+            var n = $scope.rollDice()
+            console.log(n)
+            if ((n === 5) || (n === 6)) {
+                $scope.message = "Du hadde utrygg sex, men hadde flaks."
+            }
+            else {
+                $scope.getStd()
+            }
+        }
+    }
     $scope.getStd= function() {
         checkHealth(40, '-');
-        $scope.message = "Du har blitt smittet av en kjønnssykdom!"
+        $scope.message = "Du hadde utrygg sex og ble smittet av en kjønnssykdom."
     }
+
+    //-------------------Functions to sanitize incrementing or decrementing bars
 
     checkStress = function(n) {
         if (($scope.stress + n) >= 100) {

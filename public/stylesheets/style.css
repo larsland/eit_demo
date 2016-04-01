@@ -94,7 +94,7 @@
     height: 120px;
 }
 .message {
-    font-size: 50px;
+    font-size: 40px;
     color: white;
     text-align: center;
 }
@@ -140,4 +140,7 @@
     background-color: white;
     position: absolute;
     z-index: 10;
+}
+.right {
+    float: right;
 }

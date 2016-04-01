@@ -15,7 +15,7 @@
 
   <body ng-app="gameMaster" ng-controller="MainCtrl">
       <div ng-show="health==0"class="game-over-screen">
-          <h1>Du døde:(</h1>
+          <h1>Du er død. Du overlevde i {{year}} år.</h1>
       </div>
       <div class="container">
           <div class="row">
@@ -66,10 +66,10 @@
                                       <div ng-click="dropContamination()" class="filler-box drops"></div>
                                   </td>
                                   <td class="table-cell">
-                                      <div ng-click="getStd()" class="filler-box std"></div>
+                                      <div ng-click="haveSex()" class="filler-box std"></div>
                                   </td>
                                   <td class="table-cell">
-                                      <div ng-click="rollDice()" class="filler-box dice"></div>
+                                      <div ng-click="message=rollDice()" class="filler-box dice"></div>
                                   </td>
 
                               </tr>
@@ -107,7 +107,7 @@
               <div class="col-md-12">
                   <div class="console">
                       <div style="background-color: white">
-                          <p class="console-header">Console</p>
+                          <p class="console-header">Informasjon</p>
                       </div>
                       <p class="message">{{message}}</p>
                   </div>
