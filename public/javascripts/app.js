@@ -20,6 +20,7 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
     var deadSound = new Audio("../sound/dead.mp3");
     var lowHealthSound = new Audio("../sound/lowHealth.mp3");
     var idleSound = new Audio("../sound/idle.mp3");
+    var partySound = new Audio("../sound/party.mp3");
 
 
     //--------------------Functions to perform actions--------------------------
@@ -36,6 +37,7 @@ app.controller('MainCtrl', ['$scope', '$interval', function($scope, $interval) {
     }
 
     $scope.party = function() {
+        partySound.play();
         checkStress(50)
         checkHealth(20, '-')
         $scope.message = "Du hadde en fest. Du ble gladere, men mistet helse."
