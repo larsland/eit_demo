@@ -55,11 +55,11 @@
 .drops {
     background-image: url('../images/drops.png');
 }
-.std {
-    background-image: url('../images/std.png');
-}
 .dice {
     background-image: url('../images/dice.png');
+}
+.heart {
+    background-image: url('../images/heart.png');
 }
 
 
